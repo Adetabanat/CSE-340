@@ -296,3 +296,82 @@ footer {
         text-align: center;
     }
 }
+
+
+/* classification.css */
+
+/* Container grid */
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 1200px;
+}
+
+/* Each vehicle card */
+#inv-display li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+#inv-display li:hover {
+  transform: scale(1.02);
+}
+
+/* Vehicle image */
+#inv-display img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Name and price wrapper */
+.namePrice {
+  padding: 1rem;
+  text-align: center;
+}
+
+.namePrice hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 0.5rem 0;
+}
+
+/* Vehicle name */
+.namePrice h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.namePrice a {
+  text-decoration: none;
+  color: #333;
+}
+
+.namePrice a:hover {
+  color: #007BFF;
+}
+
+/* Price */
+.namePrice span {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #28a745;
+  margin-top: 0.5rem;
+}
+
+/* Notice paragraph */
+.notice {
+  text-align: center;
+  color: #b00;
+  font-size: 1.1rem;
+  padding: 2rem;
+}
