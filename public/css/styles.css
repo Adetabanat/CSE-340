@@ -92,17 +92,27 @@ nav ul li:hover {
 }
 
 .siteName a:hover {
-    color: #ff9900;
+    color: orange;
 }
 
 #tools a {
-    color: #ffffff;
+    color: whitesmoke;
     font-size: 16px;
     text-decoration: none;
-    background-color: #333333;
+    background-color: #333;
     padding: 8px 15px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
+}
+
+#tools a:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+#tools a:focus {
+    outline: 2px solid orange;
+    outline-offset: 2px;
 }
 
 #tools a:hover {
