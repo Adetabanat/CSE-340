@@ -1,352 +1,307 @@
-
-/* Reset some default styles */
+/* Reset and Base Styles */
 body, h1, h2, h3, ul, li, p, a, span, div, header, nav, footer, section, button {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-    min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
 #wrapper {
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 20px;
+  text-align: center;
+  font-size: 2rem;
+  color: #2c3e50;
+  margin: 1em 0 0.5em;
 }
 
-/* Nav Bar */
+/* Navigation Bar */
 nav {
-    background-color: #2c3e50;
-    color: #fff;
-    padding: 12px 0;
-    border-radius: 5px;
-    margin-bottom: 20px;
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 12px 0;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 nav ul {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  list-style: none;
+  width: 100%;
 }
 
 nav ul li {
-    flex: 1 1 auto;
-    text-align: center;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    padding: 10px 0;
-    color: #ccc;
-
+  flex: 1 1 auto;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 10px 0;
+  color: #ccc;
 }
+
 nav ul li a {
-    color: inherit;
-    text-decoration: none;
-    font-weight: bold;
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
 }
-
 
 nav ul li:hover {
-    color: #f39c12;
-    text-decoration: underline;
+  color: #f39c12;
+  text-decoration: underline;
 }
 
-/* Header Styles */
+/* Header */
 #top-header {
-    background-color: #1a1a1a;
-    color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    font-family: Arial, sans-serif;
-    margin-bottom: 20px;
-    border-radius: 5px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  font-family: Arial, sans-serif;
+  margin-bottom: 20px;
+  border-radius: 5px;
 }
 
 .siteName a {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 .siteName a:hover {
-    color: orange;
+  color: orange;
 }
 
 #tools a {
-    color: whitesmoke;
-    font-size: 16px;
-    text-decoration: none;
-    background-color: #333;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+  color: whitesmoke;
+  font-size: 16px;
+  text-decoration: none;
+  background-color: #333;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 #tools a:hover {
-    background-color: #555;
-    color: #fff;
+  background-color: #ff9900;
+  color: #1a1a1a;
 }
 
 #tools a:focus {
-    outline: 2px solid orange;
-    outline-offset: 2px;
+  outline: 2px solid orange;
+  outline-offset: 2px;
 }
 
-#tools a:hover {
-    background-color: #ff9900;
-    color: #1a1a1a;
-}
-
-/* Hero / Promo Section */
+/* Hero Section */
 .hero {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    margin-bottom: 30px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 30px;
 }
 
 .car-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 .car-promo {
-    position: absolute;
-    top: 5%;
-    left: 10%;
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
-    color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 300px;
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 300px;
 }
 
 .car-promo h2 {
-    color: #f39c12;
-    margin-bottom: 10px;
+  color: #f39c12;
+  margin-bottom: 10px;
 }
 
 .car-promo p {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .car-promo button {
-    background-color: #3498db;
-    color: black;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: #3498db;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .car-promo button:hover {
-    background-color: #2980b9;
+  background-color: #2980b9;
 }
 
-/* Upgrades and Reviews Section */
+/* Upgrades and Reviews */
 .upgrades-reviews {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .upgrades, .reviews {
-    flex: 1 1 45%;
-    margin-bottom: 20px;
+  flex: 1 1 45%;
+  margin-bottom: 20px;
 }
 
-.upgrades h3, .reviews h3  {
-    margin-bottom: 10px;
-    color: #2c3e50;
-    text-align: center;
+.upgrades h3, .reviews h3 {
+  margin-bottom: 10px;
+  color: #2c3e50;
+  text-align: center;
 }
 
 .upgrade-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
 }
 
 .upgrade-grid div {
-    text-align: center;
-    background-color: #3498db;
+  text-align: center;
+  background-color: #3498db;
 }
 
 .upgrade-grid div p {
-    text-align: center;
-    color: black;
+  color: black;
 }
 
 .upgrade-grid img {
-    width: 95px;
-    height: 90px;
-    align-items: center;
+  width: 95px;
+  height: 90px;
 }
 
 .reviews ul {
-    list-style: disc inside;
+  list-style: disc inside;
 }
 
 .reviews li {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-
-/* General Button styling */
+/* Button Styles */
 button, .btn {
-    display: inline-block;
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  display: inline-block;
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover, .btn:hover {
-    background-color: #2980b9;
+  background-color: #2980b9;
 }
 
-main {
-    padding: 10px;
+/* Footer */
+footer{
+  text-align: center;
+  margin-top: 30px;
+  padding: 10px;
+  background-color: #2c3e50;
+  color: #fff;
+  border-radius: 5px;
+  opacity: 0.95;
+  font-size: 14px;
 }
 
-footer {
-    text-align: center;
-    margin-top: 30px;
-    padding: 10px;
-    background-color: #2c3e50;
-    color: #fff;
-    border-radius: 5px;
-    opacity: 0.95;
-    font-size: 14px;
+footer a {
+  color: #f39c12;
+  text-decoration: none;
 }
 
-/* Mobile responsive adjustments */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    #wrapper {
-        padding: 15px;
-    }
+  #wrapper {
+    padding: 15px;
+  }
 
-    h1 {
-        font-size: 1.8em;
-    }
+  h1 {
+    font-size: 1.8em;
+  }
 
-    #top-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  #top-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    #tools {
-        margin-top: 10px;
-    }
+  #tools {
+    margin-top: 10px;
+  }
 
-    .hero {
-        flex-direction: column;
-    }
+  .car-promo {
+    top: 10%;
+    left: 5%;
+    max-width: 90%;
+    padding: 15px;
+  }
 
-    /* Keep car-promo as absolute on mobile */
-    .car-promo {
-        top: 10%;
-        left: 5%;
-        max-width: 90%;
-        padding: 15px;
-    }
-
-    .upgrades-reviews {
-        flex-direction: column;
-    }
+  .upgrades-reviews {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 480px) {
-    nav ul li {
-        margin: 8px 0;
-    }
+  nav ul li {
+    margin: 8px 0;
+  }
 
-    h1 {
-        font-size: 1.5em;
-    }
+  h1 {
+    font-size: 1.5em;
+  }
 
-    .car-promo {
-        top: 5%;
-        left: 5%;
-        max-width: 90%;
-        padding: 10px;
-    }
+  .car-promo {
+    top: 5%;
+    left: 5%;
+    max-width: 90%;
+    padding: 10px;
+  }
 
-    button, .btn {
-        width: 100%;
-        text-align: center;
-    }
+  button, .btn {
+    width: 100%;
+    text-align: center;
+  }
 }
-/* Example CSS for login form */
-.form-box {
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.form-box label {
-  font-weight: bold;
-}
-.form-box input {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.submit-btn {
-  background: #0078d4;
-  color: #fff;
-  border: none;
-  padding: 0.75rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-.submit-btn:hover {
-  background: #005fa3;
-}
+
+/* Flash Messages */
 .flash-message {
   background: #f8d7da;
   color: #721c24;
@@ -355,8 +310,8 @@ footer {
   margin-bottom: 1rem;
 }
 
-/* Registration Form Styles */
-#registration-form {
+/* Forms */
+.form-box, #registration-form, form#loginForm {
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
@@ -368,18 +323,17 @@ footer {
   gap: 1rem;
 }
 
-#registration-form label {
+.form-box label, #registration-form label, form#loginForm label {
   font-weight: bold;
-  margin-bottom: 0.25rem;
 }
 
-#registration-form input {
+.form-box input, #registration-form input, form#loginForm input[type="email"], form#loginForm input[type="password"] {
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-#registration-form button {
+.submit-btn, #registration-form button, form#loginForm .submit-btn {
   background: #0078d4;
   color: #fff;
   border: none;
@@ -388,17 +342,21 @@ footer {
   cursor: pointer;
   font-size: 1rem;
   margin-top: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-#registration-form button:hover {
+.submit-btn:hover, #registration-form button:hover, form#loginForm .submit-btn:hover {
   background: #005fa3;
 }
 
-.flash-
+.password-rules {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 5px;
+}
 
-/* classification.css */
-
-/* Container grid */
+/* Vehicle Grid */
 #inv-display {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -409,7 +367,6 @@ footer {
   max-width: 1200px;
 }
 
-/* Each vehicle card */
 #inv-display li {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
@@ -423,14 +380,12 @@ footer {
   transform: scale(1.02);
 }
 
-/* Vehicle image */
 #inv-display img {
   width: 100%;
   height: auto;
   display: block;
 }
 
-/* Name and price wrapper */
 .namePrice {
   padding: 1rem;
   text-align: center;
@@ -442,7 +397,6 @@ footer {
   margin: 0.5rem 0;
 }
 
-/* Vehicle name */
 .namePrice h2 {
   font-size: 1.2rem;
   margin: 0.5rem 0;
@@ -457,7 +411,6 @@ footer {
   color: #007BFF;
 }
 
-/* Price */
 .namePrice span {
   display: block;
   font-size: 1rem;
@@ -466,7 +419,6 @@ footer {
   margin-top: 0.5rem;
 }
 
-/* Notice paragraph */
 .notice {
   text-align: center;
   color: #b00;
@@ -474,13 +426,7 @@ footer {
   padding: 2rem;
 }
 
-.password-rules {
-  display: block;
-  font-size: 0.9em;
-  color: #666;
-  margin-bottom: 6px;
-}
-
+/* Vehicle Detail View */
 .vehicle-detail-container {
   display: flex;
   flex-direction: column;
@@ -510,16 +456,7 @@ footer {
   }
 }
 
-
-/* Page title */
-h1 {
-  text-align: center;
-  font-size: 2rem;
-  color: #333;
-  margin-top: 20px;
-}
-
-/* Message block (like errors/success messages) */
+/* Message blocks */
 .message, .error-message, .success-message {
   margin: 1em auto;
   padding: 0.75em;
@@ -528,90 +465,17 @@ h1 {
   font-size: 0.95rem;
   text-align: center;
 }
+
 .error-message {
   background-color: #ffe0e0;
   color: #d8000c;
 }
+
 .success-message {
   background-color: #e0ffe4;
   color: #2e7d32;
 }
 
-/* Login Form Container */
-form#loginForm {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Labels and Inputs */
-form#loginForm label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-  color: #444;
-}
-
-form#loginForm input[type="email"],
-form#loginForm input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-
-/* Password rule text */
-.password-rules {
-  display: block;
-  font-size: 0.85rem;
-  color: #888;
-  margin-bottom: 8px;
-}
-
-/* Submit button */
-form#loginForm .submit-btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  background-color: #0077cc;
-  color: #fff;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-form#loginForm .submit-btn:hover {
-  background-color: #005fa3;
-}
-
-/* Register link section */
-p {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 0.95rem;
-}
-p a {
-  color: #0077cc;
-  text-decoration: none;
-}
-p a:hover {
-  text-decoration: underline;
-}
-/* Page Title */
-h1 {
-  text-align: center;
-  font-size: 2rem;
-  color: #333;
-  margin: 1em 0 0.5em;
-}
-
-/* Error / Notice Messages */
 ul.notice {
   max-width: 500px;
   margin: 10px auto;
@@ -624,55 +488,17 @@ ul.notice {
   font-size: 0.95rem;
 }
 
-/* Registration Form */
-form#registration-form {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 25px;
-  background-color: #f4f4f4;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.95rem;
 }
 
-/* Labels and Inputs */
-form#registration-form label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-  color: #333;
+p a {
+  color: #0077cc;
+  text-decoration: none;
 }
 
-form#registration-form input[type="text"],
-form#registration-form input[type="email"],
-form#registration-form input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-
-/* Password rule helper text */
-.password-rules {
-  display: block;
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 5px;
-}
-
-/* Submit Button */
-form#registration-form button[type="submit"] {
-  width: 100%;
-  padding: 12px;
-  background-color: #0077cc;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-form#registration-form button[type="submit"]:hover {
-  background-color: #005fa3;
+p a:hover {
+  text-decoration: underline;
 }
