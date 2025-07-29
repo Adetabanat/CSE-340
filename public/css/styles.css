@@ -315,7 +315,86 @@ footer {
         text-align: center;
     }
 }
+/* Example CSS for login form */
+.form-box {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form-box label {
+  font-weight: bold;
+}
+.form-box input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.submit-btn {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.submit-btn:hover {
+  background: #005fa3;
+}
+.flash-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
 
+/* Registration Form Styles */
+#registration-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#registration-form label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+#registration-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#registration-form button {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+#registration-form button:hover {
+  background: #005fa3;
+}
+
+.flash-
 
 /* classification.css */
 
@@ -395,6 +474,12 @@ footer {
   padding: 2rem;
 }
 
+.password-rules {
+  display: block;
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 6px;
+}
 
 .vehicle-detail-container {
   display: flex;
@@ -423,4 +508,171 @@ footer {
   .vehicle-detail {
     flex-direction: row;
   }
+}
+
+
+/* Page title */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* Message block (like errors/success messages) */
+.message, .error-message, .success-message {
+  margin: 1em auto;
+  padding: 0.75em;
+  max-width: 400px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+.error-message {
+  background-color: #ffe0e0;
+  color: #d8000c;
+}
+.success-message {
+  background-color: #e0ffe4;
+  color: #2e7d32;
+}
+
+/* Login Form Container */
+form#loginForm {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels and Inputs */
+form#loginForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #444;
+}
+
+form#loginForm input[type="email"],
+form#loginForm input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Password rule text */
+.password-rules {
+  display: block;
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+/* Submit button */
+form#loginForm .submit-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #0077cc;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+form#loginForm .submit-btn:hover {
+  background-color: #005fa3;
+}
+
+/* Register link section */
+p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+p a {
+  color: #0077cc;
+  text-decoration: none;
+}
+p a:hover {
+  text-decoration: underline;
+}
+/* Page Title */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin: 1em 0 0.5em;
+}
+
+/* Error / Notice Messages */
+ul.notice {
+  max-width: 500px;
+  margin: 10px auto;
+  padding: 10px 20px;
+  list-style-type: disc;
+  background-color: #ffe0e0;
+  border-left: 5px solid #d8000c;
+  color: #d8000c;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+/* Registration Form */
+form#registration-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 25px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels and Inputs */
+form#registration-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333;
+}
+
+form#registration-form input[type="text"],
+form#registration-form input[type="email"],
+form#registration-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Password rule helper text */
+.password-rules {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+/* Submit Button */
+form#registration-form button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #0077cc;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+form#registration-form button[type="submit"]:hover {
+  background-color: #005fa3;
 }
