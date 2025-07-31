@@ -1,23 +1,34 @@
-<%- messages() %>
+<% if (message && message.length > 0) { %>
+  <div class="notice">
+    <% message.forEach(msg => { %>
+      <p><%= msg %></p>
+    <% }) %>
+  </div>
+<% } %>
 
-<% if (errors) { %>
+<% if (errors && errors.length > 0) { %>
   <ul class="notice">
-    <% errors.array().forEach(error => { %>
+    <% errors.forEach(error => { %>
       <li><%= error.msg %></li>
     <% }) %>
   </ul>
 <% } %>
+
 <h1><%= title %></h1>
+
 <form id="registration-form" action="/account/register" method="post">
 
-  <label for="accountFirstName">First Name</label>
-  <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>">
+  <label for="accountFirstname">First Name</label>
+  <input type="text" name="account_firstname" id="accountFirstname" required 
+         value="<%= typeof account_firstname !== 'undefined' ? account_firstname : '' %>">
 
   <label for="accountLastName">Last Name</label>
-  <input type="text" id="accountLastName" name="account_lastname" required value="<%= locals.account_lastname %>">
+  <input type="text" id="accountLastName" name="account_lastname" required 
+         value="<%= typeof account_lastname !== 'undefined' ? account_lastname : '' %>">
 
   <label for="accountEmail">Email</label>
-  <input type="email" id="accountEmail" name="account_email" required value="<%= locals.account_email %>">
+  <input type="email" id="accountEmail" name="account_email" required 
+         value="<%= typeof account_email !== 'undefined' ? account_email : '' %>">
 
   <label for="accountPassword">Password:</label>
   <span class="password-rules">

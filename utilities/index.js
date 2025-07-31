@@ -75,6 +75,32 @@ Util.buildClassificationGrid = function (data) {
   return grid;
 };
 
+/**
+ * Builds a dropdown list of vehicle classifications for forms
+ */
+Util.buildClassificationList = async function (classification_id = null) {
+  try {
+    const data = await invModel.getClassifications();
+    let list = '<select name="classification_id" id="classification_id" required>';
+    list += "<option value=''>Choose a Classification</option>";
+
+    data.forEach((row) => {
+      list += `<option value="${row.classification_id}"`;
+      if (row.classification_id === Number(classification_id)) {
+        list += " selected";
+      }
+      list += `>${row.classification_name}</option>`;
+    });
+
+    list += "</select>";
+    return list;
+  } catch (error) {
+    console.error("Error building classification list:", error);
+    return "<select><option>Unable to load classifications</option></select>";
+  }
+};
+
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other functions in this for 

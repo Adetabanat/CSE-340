@@ -1,12 +1,55 @@
-const express = require("express")
-const router = new express.Router()
-const invController = require("../controllers/invController")
-const utilities = require("../utilities")
+const express = require("express");
+const router = new express.Router();
+const invController = require("../controllers/invController");
+const utilities = require("../utilities");
+const invValidation = require("../utilities/inventory-validation");
+
+
+// Inventory Management View
+router.get(
+  "/",
+  utilities.handleErrors(invController.buildManagementView)
+);
 
 // Classification View
-router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId))
+router.get(
+  "/type/:classificationId",
+  utilities.handleErrors(invController.buildByClassificationId)
+);
 
 // Vehicle Detail View
-router.get("/detail/:inv_id", utilities.handleErrors(invController.buildInventoryDetail))
+router.get(
+  "/detail/:inv_id",
+  utilities.handleErrors(invController.buildInventoryDetail)
+);
 
-module.exports = router
+// GET: Add Classification View
+router.get(
+  "/add-classification",
+  utilities.handleErrors(invController.buildAddClassification)
+);
+
+// POST: Handle Add Classification Form
+router.post(
+  "/add-classification",
+  invValidation.classificationRules(),
+  invValidation.checkClassificationData,
+  utilities.handleErrors(invController.addClassification)
+);
+
+// GET: Show Add Vehicle Form
+router.get(
+  "/add-inventory",
+  utilities.handleErrors(invController.buildAddVehicle)
+);
+
+// POST: Handle Add Vehicle Submission
+router.post(
+  "/add-inventory",
+  invValidation.inventoryRules(),
+  invValidation.checkInventoryData,
+  utilities.handleErrors(invController.addInventory)
+);
+
+
+module.exports = router;

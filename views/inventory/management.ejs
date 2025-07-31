@@ -1,0 +1,18 @@
+
+
+<main>
+  <h1><%= title %></h1>
+
+  <% if (message && message.length > 0) { %>
+    <div class="flash-message"><%= message %></div>
+  <% } %>
+
+  <p>Use the options below to manage the inventory:</p>
+
+  <ul>
+    <li><a href="/inv/add-classification">Add New Classification</a></li>
+    <li><a href="/inv/add-inventory">Add New Vehicle</a></li>
+  </ul>
+</main>
+
+
