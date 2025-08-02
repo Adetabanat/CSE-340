@@ -1,4 +1,5 @@
-<% if (message && message.length > 0) { %>
+<% if (typeof message !== 'undefined' && message.length > 0) { %>
+
   <div class="notice">
     <% message.forEach(msg => { %>
       <p><%= msg %></p>
