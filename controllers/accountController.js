@@ -33,50 +33,65 @@ async function buildRegister(req, res) {
  *  Process registration
  * *************************************** */
 async function registerAccount(req, res) {
-  const { account_firstname, account_lastname, account_email, account_password } = req.body;
-  const nav = await utilities.getNav();
+  console.log("➡️ Register handler hit");
 
-  const emailExists = await accountModel.checkExistingEmail(account_email);
-  if (emailExists) {
-    req.flash("notice", "Email already exists. Please use a different one.");
-    return res.status(400).render("account/register", {
-      title: "Register",
-      nav,
-      message: req.flash("notice"),
-      errors: null,
-    });
-  }
-
-  let hashedPassword;
+  let nav;
   try {
-    hashedPassword = await bcrypt.hash(account_password, 10);
-  } catch (error) {
-    console.error("Password hashing failed:", error);
-    req.flash("notice", "There was an error processing your registration.");
-    return res.status(500).render("account/register", {
-      title: "Register",
-      nav,
-      message: req.flash("notice"),
-      errors: null,
-    });
+    nav = await utilities.getNav();
+  } catch (e) {
+    console.error("❌ Error getting navigation:", e);
+    nav = [];
   }
 
-  const regResult = await accountModel.accountRegister(
-    account_firstname,
-    account_lastname,
-    account_email,
-    hashedPassword
-  );
+  const { account_firstname, account_lastname, account_email, account_password } = req.body;
+  console.log("📥 Request body:", req.body);
 
-  if (regResult) {
-    req.flash("notice", `Congratulations, you're registered ${account_firstname}. Please log in.`);
-    return res.status(201).render("account/login", {
-      title: "Login",
-      nav,
-      message: req.flash("notice"),
-    });
-  } else {
-    req.flash("notice", "Sorry, the registration failed.");
+  try {
+    const emailExists = await accountModel.checkExistingEmail(account_email);
+    if (emailExists) {
+      console.warn("⚠️ Email already exists:", account_email);
+      req.flash("notice", "Email already exists. Please use a different one.");
+      return res.status(400).render("account/register", {
+        title: "Register",
+        nav,
+        message: req.flash("notice"),
+        errors: null,
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(account_password, 10);
+    console.log("🔐 Hashed password created");
+
+    const regResult = await accountModel.accountRegister(
+      account_firstname,
+      account_lastname,
+      account_email,
+      hashedPassword
+    );
+
+    console.log("🧾 Registration result:", regResult);
+
+    if (regResult?.rowCount > 0) {
+      req.flash("notice", `🎉 Congratulations ${account_firstname}, you're registered! Please log in.`);
+      return res.status(201).render("account/login", {
+        title: "Login",
+        nav,
+        message: req.flash("notice"),
+      });
+    } else {
+      console.error("❌ Registration failed: no rows inserted");
+      req.flash("notice", "Sorry, registration failed. Please try again.");
+      return res.status(500).render("account/register", {
+        title: "Register",
+        nav,
+        message: req.flash("notice"),
+        errors: null,
+      });
+    }
+
+  } catch (error) {
+    console.error("💥 Registration error:", error);
+    req.flash("notice", "There was an unexpected error during registration.");
     return res.status(500).render("account/register", {
       title: "Register",
       nav,
@@ -91,3 +106,4 @@ module.exports = {
   buildRegister,
   registerAccount,
 };
+ 

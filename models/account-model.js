@@ -25,12 +25,14 @@ async function accountRegister(firstname, lastname, email, hashedPassword) {
       RETURNING *;
     `;
     const result = await pool.query(sql, [firstname, lastname, email, hashedPassword]);
-    return result.rowCount > 0;
+    console.log("✅ New account inserted:", result.rows[0]); // Optional debug
+    return result; // Return full result, not boolean
   } catch (error) {
     console.error("Error registering account:", error);
     throw new Error("Account registration failed.");
   }
 }
+
 
 module.exports = {
   checkExistingEmail,
