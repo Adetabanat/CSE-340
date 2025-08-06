@@ -22,6 +22,8 @@ validate.registrationRules = () => {
 			.notEmpty()
 			.isLength({ min: 2 })
 			.withMessage("Last name is required."),
+		
+
 
 		// valid email is required and cannot already exist in the database
 		body("account_email")
@@ -52,6 +54,38 @@ validate.registrationRules = () => {
 			.withMessage("Password does not meet requirements."),
 	];
 };
+
+// Login validation rules
+validate.loginRules = () => {
+	return [
+		body("account_email")
+			.trim()
+			.isEmail()
+			.normalizeEmail()
+			.withMessage("A valid email is required."),
+		
+		body("account_password")
+			.trim()
+			.notEmpty()
+			.withMessage("Password is required."),
+	];
+};
+
+validate.checkLoginData = async (req, res, next) => {
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("account/login", {
+      errors: errors.array(),
+      title: "Login",
+      nav,
+      account_email: req.body.account_email,
+    });
+    return;
+  }
+  next();
+};
+
 
 /* ******************************
  * Check data and return errors or continue to registration

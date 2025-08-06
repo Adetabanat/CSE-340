@@ -9,6 +9,10 @@ const utilities = require("./utilities")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
 
 
 const app = express()
@@ -41,6 +45,34 @@ app.use(function(req, res, next){
   next()
 })
 
+app.use(cookieParser());
+
+// Middleware to check login and set local variables
+app.use((req, res, next) => {
+  const token = req.cookies.jwt;
+
+  res.locals.loggedin = false;
+  res.locals.clientFirstname = null; // ✅ Always define
+
+  if (!token) {
+    return next();
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    res.locals.loggedin = true;
+    res.locals.clientFirstname = decoded.client_firstname; // ✅ Now it's always defined
+    res.locals.clientId = decoded.client_id;
+  } catch (error) {
+    res.locals.loggedin = false;
+  }
+
+  next();
+});
+
+
+
+// Cookie Parser Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).render("errors/500", {
@@ -51,6 +83,8 @@ app.use((err, req, res, next) => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(static)
+
+app.use(utilities.checkJWTToken)
 
 // Index Route
 app.get("/", utilities.handleErrors(baseController.buildHome))

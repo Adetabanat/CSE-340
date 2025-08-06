@@ -305,12 +305,20 @@ footer a {
 
 /* Flash Messages */
 .flash-message {
-  background: #f8d7da;
-  color: #721c24;
-  padding: 1rem;
-  border-radius: 4px;
+  color: red;
+  list-style: none;
+  padding-left: 0;
   margin-bottom: 1rem;
 }
+.password-rules {
+  font-size: 0.9rem;
+  color: #555;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+
+
 
 /* Forms */
 .form-box, #registration-form, form#loginForm {
