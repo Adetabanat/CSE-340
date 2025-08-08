@@ -57,7 +57,7 @@ router.get(
 
 
 router.get("/delete/:inv_id", invController.buildDeleteConfirmation);
-router.post("/delete", invController.deleteInventoryItem);
+router.post("/delete", invController.deleteInventoryById);
 
 
 module.exports = router;

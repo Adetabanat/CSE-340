@@ -211,7 +211,7 @@ invCont.buildDeleteConfirmation = async function (req, res, next) {
 /* ***************************
  *  Delete Inventory Item (POST)
  * ************************** */
-invCont.deleteInventoryItem = async function (req, res, next) {
+invCont.deleteInventoryById = async function (req, res, next) {
   const inv_id = parseInt(req.body.inv_id);
 
   try {
