@@ -5,25 +5,26 @@ const { body, validationResult } = require("express-validator");
 const accountModel = require("../models/account-model");
 
 const validate = {};
-
-// Registration validation rules
+/*  **********************************
+ *  Registration Data Validation Rules
+ * ********************************* */
 validate.registrationRules = () => {
 	return [
-		// First Name
+		// firstname is required and must be string
 		body("account_firstname")
 			.trim()
+			.escape()
 			.notEmpty()
 			.isLength({ min: 1 })
-			.withMessage("First name is required."),
+			.withMessage("Please provide a first name."), // on error this message is sent.
 
-		// Last Name
+		// lastname is required and must be string
 		body("account_lastname")
 			.trim()
+			.escape()
 			.notEmpty()
 			.isLength({ min: 2 })
-			.withMessage("Last name is required."),
-		
-
+			.withMessage("Please provide a last name."), // on error this message is sent.
 
 		// valid email is required and cannot already exist in the database
 		body("account_email")
@@ -40,7 +41,7 @@ validate.registrationRules = () => {
 				}
 			}),
 
-		// Password
+		// password is required and must be strong password
 		body("account_password")
 			.trim()
 			.notEmpty()
@@ -63,7 +64,7 @@ validate.loginRules = () => {
 			.isEmail()
 			.normalizeEmail()
 			.withMessage("A valid email is required."),
-		
+
 		body("account_password")
 			.trim()
 			.notEmpty()
@@ -72,20 +73,19 @@ validate.loginRules = () => {
 };
 
 validate.checkLoginData = async (req, res, next) => {
-  let errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    let nav = await utilities.getNav();
-    res.render("account/login", {
-      errors: errors.array(),
-      title: "Login",
-      nav,
-      account_email: req.body.account_email,
-    });
-    return;
-  }
-  next();
+	let errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		let nav = await utilities.getNav();
+		res.render("account/login", {
+			errors: errors.array(),
+			title: "Login",
+			nav,
+			account_email: req.body.account_email,
+		});
+		return;
+	}
+	next();
 };
-
 
 /* ******************************
  * Check data and return errors or continue to registration
@@ -103,7 +103,7 @@ validate.checkRegData = async (req, res, next) => {
 			account_firstname,
 			account_lastname,
 			account_email,
-			message: [], 
+			//message: [],
 		});
 		return;
 	}

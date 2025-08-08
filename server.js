@@ -84,6 +84,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(static)
 
+//app.use(express.static(path.join(__dirname, "public")));
+
 app.use(utilities.checkJWTToken)
 
 // Index Route

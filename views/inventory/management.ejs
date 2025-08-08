@@ -1,10 +1,13 @@
-
-
 <main>
   <h1><%= title %></h1>
 
+  <!-- Flash message -->
   <% if (message && message.length > 0) { %>
-    <div class="flash-message"><%= message %></div>
+    <div class="flash-message">
+      <% message.forEach(msg => { %>
+        <p><%= msg %></p>
+      <% }) %>
+    </div>
   <% } %>
 
   <p>Use the options below to manage the inventory:</p>
@@ -13,6 +16,19 @@
     <li><a href="/inv/add-classification">Add New Classification</a></li>
     <li><a href="/inv/add-inventory">Add New Vehicle</a></li>
   </ul>
+
+  <h2>Manage Inventory</h2>
+  <p>Select a classification from the list to see the vehicles in that category.</p>
+
+  <!-- Classification Dropdown -->
+  <%= classificationSelect %>
+
+  <!-- Inventory Table -->
+  <table id="inventoryDisplay"></table>
+
+  <!-- Message for non-JS users -->
+  <noscript>JavaScript must be enabled to use this page.</noscript>
 </main>
 
-
+<!-- Script to handle dropdown changes and display table data -->
+<script src="../../js/inventory.js"></script>

@@ -1,0 +1,56 @@
+<main>
+  <h1><%= title %></h1>
+
+  <!-- Flash message -->
+  <% if (message && message.length > 0) { %>
+    <div class="flash-message">
+      <% message.forEach(msg => { %>
+        <p><%= msg %></p>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <% if (errors && errors.length > 0) { %>
+    <ul class="notice">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <p>Confirm Deletion - This action is <strong>permanent</strong>.</p>
+
+  <form action="/inv/delete" method="post" class="inv-form">
+    <fieldset>
+      <legend>Vehicle Details</legend>
+
+      <!-- Make -->
+      <label for="inv_make">Make</label>
+      <input type="text" id="inv_make" name="inv_make" value="<%= item.inv_make %>" readonly>
+
+      <!-- Model -->
+      <label for="inv_model">Model</label>
+      <input type="text" id="inv_model" name="inv_model" value="<%= item.inv_model %>" readonly>
+
+      <!-- Year -->
+      <label for="inv_year">Year</label>
+      <input type="text" id="inv_year" name="inv_year" value="<%= item.inv_year %>" readonly>
+
+      <!-- Price -->
+      <label for="inv_price">Price</label>
+      <input type="text" id="inv_price" name="inv_price" value="$<%= item.inv_price.toLocaleString() %>" readonly>
+
+      <!-- Type / Classification -->
+      <label for="classification_name">Type</label>
+      <input type="text" id="classification_name" name="classification_name" value="<%= item.classification_name %>" readonly>
+
+      <!-- Hidden field to pass inv_id -->
+      <input type="hidden" name="inv_id" value="<%= item.inv_id %>">
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-danger">Delete Vehicle</button>
+      <a href="/inv" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</main>

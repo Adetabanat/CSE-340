@@ -81,26 +81,26 @@ Util.buildClassificationGrid = function (data) {
  * Builds a dropdown list of vehicle classifications for forms
  */
 Util.buildClassificationList = async function (classification_id = null) {
-  try {
-    const data = await invModel.getClassifications();
-    let list = '<select name="classification_id" id="classification_id" required>';
-    list += "<option value=''>Choose a Classification</option>";
+  let data = await invModel.getClassifications(); // data is an array
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
+  
+  data.forEach((row) => {
+    classificationList += `<option value="${row.classification_id}"`;
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected";
+    }
+    classificationList += `>${row.classification_name}</option>`;
+  });
 
-    data.forEach((row) => {
-      list += `<option value="${row.classification_id}"`;
-      if (row.classification_id === Number(classification_id)) {
-        list += " selected";
-      }
-      list += `>${row.classification_name}</option>`;
-    });
+  classificationList += "</select>";
+  return classificationList;
+}
 
-    list += "</select>";
-    return list;
-  } catch (error) {
-    console.error("Error building classification list:", error);
-    return "<select><option>Unable to load classifications</option></select>";
-  }
-};
 
 
 Util.checkLogin = (req, res, next) => {

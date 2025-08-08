@@ -23,7 +23,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+h1,h2 {
   text-align: center;
   font-size: 2rem;
   color: #2c3e50;
@@ -458,6 +458,64 @@ footer a {
 .vehicle-info {
   flex: 1;
   padding: 1em;
+}
+/* Flash message styling */
+.flash-message {
+  padding: 10px;
+  background-color: #f9f1c7;
+  border-left: 5px solid #f1c40f;
+  margin-bottom: 1rem;
+}
+
+/* Table styling */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+#inventoryDisplay thead {
+  background-color: #0074D9;
+  color: #fff;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+#inventoryDisplay tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#inventoryDisplay a {
+  color: #0074D9;
+  text-decoration: none;
+}
+
+#inventoryDisplay a:hover {
+  text-decoration: underline;
+}
+
+/* Dropdown styling */
+select {
+  padding: 8px;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+
+/* Noscript */
+noscript {
+  display: block;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #ffeeba;
+  border-left: 5px solid #ffc107;
+  color: #856404;
+  font-weight: bold;
 }
 
 @media (min-width: 768px) {
