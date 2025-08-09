@@ -55,6 +55,21 @@ router.get(
   utilities.handleErrors(invController.getInventoryJSON)
 );
 
+// GET: Show Edit Inventory Form
+// GET: Show Edit Inventory Form
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.editInventoryView)
+);
+
+// POST: Handle Inventory Update Submission
+router.post(
+  "/update",
+  invValidation.inventoryRules(),
+  invValidation.checkInventoryData,
+  utilities.handleErrors(invController.updateInventory)
+);
+
 
 router.get("/delete/:inv_id", invController.buildDeleteConfirmation);
 router.post("/delete", invController.deleteInventoryById);

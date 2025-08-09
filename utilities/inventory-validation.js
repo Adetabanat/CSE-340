@@ -65,6 +65,39 @@ const checkInventoryData = async (req, res, next) => {
 	next();
 };
 
+
+
+const checkUpdateData = async (req, res, next) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		const nav = await utilities.getNav();
+		const classifications = await invModel.getClassifications();
+		res.render("inventory/edit-inventory", {
+			title: "Edit Inventory",
+			nav,
+			errors: errors.array(),
+			classifications,
+			vehicle: {
+				// ✅ new
+				classification_id: req.body.classification_id,
+				inv_make: req.body.inv_make,
+			    inv_id: req.body.inv_id,
+				inv_model: req.body.inv_model,
+				inv_year: req.body.inv_year,
+				inv_description: req.body.inv_description,
+				inv_image: req.body.inv_image,
+				inv_thumbnail: req.body.inv_thumbnail,
+				inv_price: req.body.inv_price,
+				inv_miles: req.body.inv_miles,
+				inv_color: req.body.inv_color,
+			},
+			message: req.flash("message"),
+		});
+
+		return;
+	}
+	next();
+};
 // ✅ NEW: Classification validation rules
 const classificationRules = () => {
 	return [
