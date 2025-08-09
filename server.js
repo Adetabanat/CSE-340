@@ -46,6 +46,8 @@ app.use(function(req, res, next){
 })
 
 app.use(cookieParser());
+app.use(utilities.checkJWTToken)
+
 
 // Middleware to check login and set local variables
 app.use((req, res, next) => {

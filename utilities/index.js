@@ -104,7 +104,7 @@ Util.buildClassificationList = async function (classification_id = null) {
 
 
 Util.checkLogin = (req, res, next) => {
-  if (req.session && req.session.loggedin) {
+  if (res.locals.loggedin) {
     next();
   } else {
     req.flash("message", "Please log in.");

@@ -14,7 +14,7 @@ router.get("/trigger-error", (req, res, next) => {
 });
 
 // Account management view (default /account/)
-router.get("/", utilities.checkLogin, accountController.buildAccountManagement);
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
 
 // Login and registration views
 router.get("/login", accountController.buildLogin);

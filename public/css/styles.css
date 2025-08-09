@@ -1,4 +1,10 @@
 /* Reset and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body, h1, h2, h3, ul, li, p, a, span, div, header, nav, footer, section, button {
   margin: 0;
   padding: 0;
@@ -13,6 +19,22 @@ body {
   min-height: 100vh;
 }
 
+p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+p a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+/* Wrapper */
 #wrapper {
   width: 90%;
   max-width: 1200px;
@@ -23,11 +45,25 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Headings */
 h1, h2 {
   text-align: center;
   font-size: 2rem;
   color: #2c3e50;
   margin: 1em 0 0.5em;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+h2, h3 {
+  color: #2c3e50;
+}
+
+h3 {
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 /* Navigation Bar */
@@ -174,12 +210,6 @@ nav ul li:hover {
   margin-bottom: 20px;
 }
 
-.upgrades h3, .reviews h3 {
-  margin-bottom: 10px;
-  color: #2c3e50;
-  text-align: center;
-}
-
 .upgrade-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -213,7 +243,7 @@ nav ul li:hover {
   margin-bottom: 10px;
 }
 
-/* Button Styles */
+/* Buttons */
 button, .btn {
   display: inline-block;
   background-color: #3498db;
@@ -248,76 +278,115 @@ footer a {
   text-decoration: none;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #wrapper {
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 1.8em;
-  }
-
-  #top-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  #tools {
-    margin-top: 10px;
-  }
-
-  .car-promo {
-    top: 10%;
-    left: 5%;
-    max-width: 90%;
-    padding: 15px;
-  }
-
-  .upgrades-reviews {
-    flex-direction: column;
-  }
+/* Registration Form */
+#registration-form {
+  max-width: 420px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
 }
 
-@media (max-width: 480px) {
-  nav ul li {
-    margin: 8px 0;
-  }
+#registration-form h1 {
+  text-align: center;
+  color: #2c3e50;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
 
-  h1 {
-    font-size: 1.5em;
-  }
+#registration-form label {
+  font-weight: 600;
+  color: #34495e;
+}
 
-  .car-promo {
-    top: 5%;
-    left: 5%;
-    max-width: 90%;
-    padding: 10px;
-  }
+#registration-form input[type="text"],
+#registration-form input[type="email"],
+#registration-form input[type="password"] {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
 
-  button, .btn {
-    width: 100%;
-    text-align: center;
-  }
+#registration-form input:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 8px #3498dbaa;
+}
+
+#registration-form span {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: -1rem;
+  margin-bottom: 0.7rem;
+  font-style: italic;
+}
+
+#registration-form button[type="submit"] {
+  background-color: #3498db;
+  color: #fff;
+  font-weight: 700;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1.2rem;
+}
+
+#registration-form button[type="submit"]:hover {
+  background-color: #2980b9;
 }
 
 /* Flash Messages */
 .flash-message {
-  background-color: #e0f7fa;
-  color: #00796b;
   padding: 1rem;
-  border-left: 5px solid #00796b;
   margin-bottom: 1rem;
   border-radius: 6px;
   font-weight: 600;
   text-align: center;
+  font-size: 0.95rem;
+  list-style: none;
 }
 
+.flash-message.notice {
+  background-color: #cff4fc;
+  border-left-color: #0dcaf0;
+  color: #055160;
+  border-left: 6px solid #0dcaf0;
+}
+
+.flash-message.error {
+  background-color: #f8d7da;
+  border-left: 6px solid #d9534f;
+  color: #842029;
+}
+
+.notice, .flash-message {
+  background-color: #e0f7fa;
+  border-left: 5px solid #00796b;
+  color: #00796b;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  list-style: none;
+}
+
+.notice li,
+.flash-message li {
+  margin-bottom: 0.5rem;
+}
+
+/* Error Messages */
 .error-messages {
   background-color: #ffebee;
   color: #c62828;
@@ -332,7 +401,107 @@ footer a {
   padding-left: 1.25rem;
 }
 
-/* Forms */
+/* Login Container */
+#loginContainer {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem 1.8rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#loginContainer h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+#loginContainer p {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #34495e;
+}
+
+#loginContainer p a {
+  color: #2980b9;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#loginContainer p a:hover,
+#loginContainer p a:focus {
+  color: #1c5980;
+  text-decoration: underline;
+}
+
+/* Login Form */
+#loginForm fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+#loginForm label {
+  font-weight: 600;
+  color: #34495e;
+  font-size: 1rem;
+}
+
+#loginForm input[type="email"],
+#loginForm input[type="password"] {
+  padding: 0.75rem 1rem;
+  border: 1.8px solid #bdc3c7;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+#loginForm input[type="email"]:focus,
+#loginForm input[type="password"]:focus {
+  border-color: #2980b9;
+  outline: none;
+  box-shadow: 0 0 6px rgba(41, 128, 185, 0.35);
+}
+
+/* Password help text */
+.password-rules {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: -0.8rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Submit button for login */
+.submit-btn {
+  padding: 0.85rem 1rem;
+  background-color: #2980b9;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.submit-btn:hover,
+.submit-btn:focus {
+  background-color: #1c5980;
+  outline: none;
+}
+
+/* General Forms Styling */
 .form-box, #registration-form, form#loginForm {
   max-width: 400px;
   margin: 2rem auto;
@@ -438,13 +607,6 @@ footer a {
   margin-top: 0.5rem;
 }
 
-.notice {
-  text-align: center;
-  color: #b00;
-  font-size: 1.1rem;
-  padding: 2rem;
-}
-
 /* Vehicle Detail */
 .vehicle-container {
   max-width: 1200px;
@@ -502,27 +664,6 @@ footer a {
   color: #000;
 }
 
-/* Responsive for smaller screens */
-@media (max-width: 768px) {
-  .vehicle-detail {
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  .vehicle-detail img,
-  .vehicle-info {
-    flex: 1 1 100%;
-  }
-
-  .vehicle-info h2 {
-    font-size: 1.75rem;
-  }
-
-  .vehicle-info h3 {
-    font-size: 1.25rem;
-  }
-}
-
 /* Inventory Table */
 #inventoryDisplay {
   width: 100%;
@@ -556,133 +697,9 @@ footer a {
   text-decoration: underline;
 }
 
-/* Dropdown */
+/* Dropdowns */
 select, #classificationList {
   padding: 8px;
   font-size: 16px;
-  margin: 10px 0 20px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #f1faee;
-  cursor: pointer;
-}
-
-/* Noscript */
-noscript {
-  display: block;
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #ffeeba;
-  border-left: 5px solid #ffc107;
-  color: #856404;
-  font-weight: bold;
-}
-
-/* Message blocks */
-.message, .error-message, .success-message {
-  margin: 1em auto;
-  padding: 0.75em;
-  max-width: 400px;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  text-align: center;
-}
-
-.error-message {
-  background-color: #ffe0e0;
-  color: #d8000c;
-}
-
-.success-message {
-  background-color: #e0ffe4;
-  color: #2e7d32;
-}
-
-ul.notice {
-  max-width: 500px;
-  margin: 10px auto;
-  padding: 10px 20px;
-  list-style-type: disc;
-  background-color: #ffe0e0;
-  border-left: 5px solid #d8000c;
-  color: #d8000c;
-  border-radius: 6px;
-  font-size: 0.95rem;
-}
-
-p {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 0.95rem;
-}
-
-p a {
-  color: #0077cc;
-  text-decoration: none;
-}
-
-p a:hover {
-  text-decoration: underline;
-}
-
-/* Inventory Action Links */
-.inventory-actions {
-  list-style-type: none;
-  padding: 0;
-}
-
-.inventory-actions li {
-  margin-bottom: 1em;
-}
-
-.inventory-actions a {
-  text-decoration: none;
-  color: #0056b3;
-  font-weight: bold;
-}
-
-.inventory-actions a:hover {
-  text-decoration: underline;
-}
-
-/* Inventory Form */
-.inv-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.inv-form label {
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-.inv-form input,
-.inv-form textarea,
-.inv-form select {
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.inv-form textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-.inv-form button {
-  margin-top: 2rem;
-  padding: 0.75rem;
-  font-size: 1rem;
-  background-color: #0066cc;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.inv-form button:hover {
-  background-color: #004999;
+  margin: 0.5rem;
 }

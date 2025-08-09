@@ -49,7 +49,7 @@ async function accountLogin(req, res) {
 			account_email,
 			errors: null,
 			message: req.flash("notice"),
-		});
+		}); 
 	}
 
 	try {
