@@ -23,7 +23,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-h1,h2 {
+h1, h2 {
   text-align: center;
   font-size: 2rem;
   color: #2c3e50;
@@ -189,10 +189,14 @@ nav ul li:hover {
 .upgrade-grid div {
   text-align: center;
   background-color: #3498db;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .upgrade-grid div p {
   color: black;
+  margin-top: 5px;
 }
 
 .upgrade-grid img {
@@ -202,6 +206,7 @@ nav ul li:hover {
 
 .reviews ul {
   list-style: disc inside;
+  padding-left: 0;
 }
 
 .reviews li {
@@ -227,7 +232,7 @@ button:hover, .btn:hover {
 }
 
 /* Footer */
-footer{
+footer {
   text-align: center;
   margin-top: 30px;
   padding: 10px;
@@ -279,8 +284,6 @@ footer a {
   }
 }
 
-
-
 @media (max-width: 480px) {
   nav ul li {
     margin: 8px 0;
@@ -305,20 +308,29 @@ footer a {
 
 /* Flash Messages */
 .flash-message {
-  color: red;
-  list-style: none;
-  padding-left: 0;
+  background-color: #e0f7fa;
+  color: #00796b;
+  padding: 1rem;
+  border-left: 5px solid #00796b;
   margin-bottom: 1rem;
-}
-.password-rules {
-  font-size: 0.9rem;
-  color: #555;
-  display: block;
-  margin-bottom: 0.3rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
 }
 
+.error-messages {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-left: 5px solid #c62828;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+}
 
-
+.error-messages ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
 
 /* Forms */
 .form-box, #registration-form, form#loginForm {
@@ -359,13 +371,6 @@ footer a {
   background: #005fa3;
 }
 
-.password-rules {
-  display: block;
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 5px;
-}
-
 /* Vehicle Grid */
 #inv-display {
   display: grid;
@@ -394,6 +399,7 @@ footer a {
   width: 100%;
   height: auto;
   display: block;
+  border-bottom: 1px solid #ccc;
 }
 
 .namePrice {
@@ -410,11 +416,14 @@ footer a {
 .namePrice h2 {
   font-size: 1.2rem;
   margin: 0.5rem 0;
+  color: #2c3e50;
 }
 
 .namePrice a {
   text-decoration: none;
-  color: #333;
+  color: #2c3e50;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .namePrice a:hover {
@@ -436,38 +445,85 @@ footer a {
   padding: 2rem;
 }
 
-/* Vehicle Detail View */
-.vehicle-detail-container {
-  display: flex;
-  flex-direction: column;
-  padding: 1em;
+/* Vehicle Detail */
+.vehicle-container {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 1rem;
 }
 
 .vehicle-detail {
   display: flex;
-  flex-direction: column;
-  gap: 1em;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1.5rem;
 }
 
 .vehicle-detail img {
+  flex: 1 1 400px;
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .vehicle-info {
-  flex: 1;
-  padding: 1em;
-}
-/* Flash message styling */
-.flash-message {
-  padding: 10px;
-  background-color: #f9f1c7;
-  border-left: 5px solid #f1c40f;
-  margin-bottom: 1rem;
+  flex: 1 1 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* Table styling */
+.vehicle-info h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.vehicle-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #2a9d8f; /* Teal for price */
+}
+
+.vehicle-info p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  color: #444;
+}
+
+.vehicle-info p strong {
+  font-weight: 600;
+  color: #000;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .vehicle-detail {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .vehicle-detail img,
+  .vehicle-info {
+    flex: 1 1 100%;
+  }
+
+  .vehicle-info h2 {
+    font-size: 1.75rem;
+  }
+
+  .vehicle-info h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Inventory Table */
 #inventoryDisplay {
   width: 100%;
   border-collapse: collapse;
@@ -493,19 +549,23 @@ footer a {
 #inventoryDisplay a {
   color: #0074D9;
   text-decoration: none;
+  font-weight: 600;
 }
 
 #inventoryDisplay a:hover {
   text-decoration: underline;
 }
 
-/* Dropdown styling */
-select {
+/* Dropdown */
+select, #classificationList {
   padding: 8px;
   font-size: 16px;
-  margin: 10px 0;
+  margin: 10px 0 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f1faee;
+  cursor: pointer;
 }
-
 
 /* Noscript */
 noscript {
@@ -516,12 +576,6 @@ noscript {
   border-left: 5px solid #ffc107;
   color: #856404;
   font-weight: bold;
-}
-
-@media (min-width: 768px) {
-  .vehicle-detail {
-    flex-direction: row;
-  }
 }
 
 /* Message blocks */
@@ -571,7 +625,7 @@ p a:hover {
   text-decoration: underline;
 }
 
-
+/* Inventory Action Links */
 .inventory-actions {
   list-style-type: none;
   padding: 0;
@@ -591,7 +645,7 @@ p a:hover {
   text-decoration: underline;
 }
 
-
+/* Inventory Form */
 .inv-form {
   display: flex;
   flex-direction: column;
@@ -631,27 +685,4 @@ p a:hover {
 
 .inv-form button:hover {
   background-color: #004999;
-}
-
-.flash-message {
-  background-color: #e0f7fa;
-  color: #00796b;
-  padding: 1rem;
-  border-left: 5px solid #00796b;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-}
-
-.error-messages {
-  background-color: #ffebee;
-  color: #c62828;
-  padding: 1rem;
-  border-left: 5px solid #c62828;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-}
-
-.error-messages ul {
-  margin: 0;
-  padding-left: 1.25rem;
 }

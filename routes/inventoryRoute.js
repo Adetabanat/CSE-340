@@ -20,7 +20,7 @@ router.get(
 // Vehicle Detail View
 router.get(
   "/detail/:inv_id",
-  utilities.handleErrors(invController.buildInventoryDetail)
+  utilities.handleErrors(invController.buildByInventoryId)
 );
 
 // GET: Add Classification View

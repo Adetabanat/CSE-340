@@ -31,6 +31,25 @@ async function getInventoryById(inv_id) {
 	}
 }
 
+// models/inventory-model.js
+
+async function getVehicleById(inv_id) {
+  try {
+    const sql = `
+      SELECT * 
+      FROM public.inventory
+      JOIN public.classification
+      ON public.inventory.classification_id = public.classification.classification_id
+      WHERE inv_id = $1
+    `;
+    const result = await pool.query(sql, [inv_id]);
+    return result.rows[0]; // return the single vehicle object
+  } catch (error) {
+    console.error("getVehicleById error:", error);
+    throw error;
+  }
+}
+
 /* ***************************
  *  Get inventory items and classification_name by classification_id
  * ************************** */
@@ -118,6 +137,7 @@ module.exports = {
 	getClassifications,
 	getInventoryByClassificationId,
 	getInventoryById,
+	getVehicleById,
 	addClassification,
 	addInventory,
 	deleteInventoryById,

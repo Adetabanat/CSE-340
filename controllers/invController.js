@@ -1,4 +1,4 @@
-const invModel = require("../models/inventory-model");
+const invModel = require("../models/inventory-model.js");
 const utilities = require("../utilities/");
 const { validationResult } = require("express-validator");
 
@@ -88,6 +88,29 @@ invCont.buildByClassificationId = async function (req, res, next) {
     next(error);
   }
 };
+
+/* ***************************
+ *  Build Vehicle Detail View
+ * ************************** */
+invCont.buildByInventoryId = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.inv_id);
+    const item = await invModel.getInventoryById(inv_id);
+    const nav = await utilities.getNav();
+    const detailHTML = utilities.buildDetailView(item); 
+
+    res.render("./inventory/detail", {
+      title: `${item.inv_make} ${item.inv_model}`,
+      nav,
+      detailHTML,
+      message: req.flash("message") || [],
+      errors: [],
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 /* ***************************
  *  Add Classification submission
