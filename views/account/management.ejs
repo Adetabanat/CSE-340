@@ -1,24 +1,38 @@
+<h1>Account Management</h1>
+
+<% if (typeof message !== 'undefined' && message.length > 0) { %>
+<ul class="notice">
+  <% message.forEach(msg => { %>
+    <li><%= msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+<ul class="errors">
+  <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<p>You're logged in.</p>
 
 
-<main>
-  <h1>Account Management</h1>
-
-  <% if (messages && messages.length > 0) { %>
-    <ul class="notice">
-      <% messages.forEach(msg => { %>
-        <li><%= msg %></li>
-      <% }) %>
-    </ul>
+<h2>
+  <% if (typeof clientFirstname !== 'undefined') { %>
+    Welcome, <%= clientFirstname %>!
+  <% } else { %>
+    Welcome!
   <% } %>
+</h2>
 
-  <% if (errors && errors.length > 0) { %>
-    <ul class="errors">
-      <% errors.forEach(error => { %>
-        <li><%= error.msg %></li>
-      <% }) %>
-    </ul>
-  <% } %>
 
-  <p>You're logged in.</p>
-</main>
+<p>
+  <a href="/account/update/<%= typeof clientId !== 'undefined' ? clientId : '' %>">Update Account Information</a>
+</p>
 
+<% if (typeof account_type !== 'undefined' && (account_type === "Employee" || account_type === "Admin")) { %>
+  <h3>Inventory Management</h3>
+  <p><a href="/inv/manage">Access Inventory Management</a></p>
+<% } %>

@@ -1,0 +1,9 @@
+<% if (typeof title !== 'undefined') { %>
+  <h1><%= title %></h1>
+<% } %>
+
+<% if (typeof message !== 'undefined' && message.length > 0) { %>
+  <div class="flash-message"><%= message[0] %></div>
+<% } %>
+
+<%- typeof grid !== 'undefined' ? grid : '' %>

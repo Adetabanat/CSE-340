@@ -2,9 +2,14 @@
   <h1><%= title %></h1>
 <% } %>
 
-<% if (typeof message !== 'undefined' && message.length > 0) { %>
-  <div class="flash-message"><%= message[0] %></div>
+<% if (typeof message !== 'undefined') { %>
+  <% if (Array.isArray(message) && message.length > 0) { %>
+    <div class="flash-message"><%= message[0] %></div>
+  <% } else if (typeof message === 'string' && message.trim() !== '') { %>
+    <div class="flash-message"><%= message %></div>
+  <% } %>
 <% } %>
 
-
-<%- grid %>
+<% if (typeof grid !== 'undefined') { %>
+  <%- grid %>
+<% } %>

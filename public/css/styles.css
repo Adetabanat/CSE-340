@@ -1,4 +1,21 @@
 /* ============================= */
+/* CSS Variables & Root Colors    */
+/* ============================= */
+:root {
+  --color-primary: #3498db;
+  --color-primary-hover: #2980b9;
+  --color-accent: #f39c12;
+  --color-text: #2c3e50;
+  --color-background: #f4f4f4;
+  --color-success: #28a745;
+  --color-error: #d9534f;
+  --color-info: #0dcaf0;
+  --color-nav-bg: #2c3e50;
+  --color-header-bg: #1a1a1a;
+  --color-tools-bg: #333;
+}
+
+/* ============================= */
 /* Reset and Base Styles          */
 /* ============================= */
 *,
@@ -15,8 +32,8 @@ body, h1, h2, h3, ul, li, p, a, span, div, header, nav, footer, section, button 
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: var(--color-background);
+  color: var(--color-text);
   line-height: 1.6;
   min-height: 100vh;
 }
@@ -28,7 +45,7 @@ p {
 }
 
 p a {
-  color: #0077cc;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -39,6 +56,11 @@ p a:hover {
 /* ============================= */
 /* Wrapper and Layout             */
 /* ============================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 #wrapper {
   width: 90%;
   max-width: 1200px;
@@ -47,6 +69,7 @@ p a:hover {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
 }
 
 /* ============================= */
@@ -55,7 +78,7 @@ p a:hover {
 h1, h2 {
   text-align: center;
   font-size: 2rem;
-  color: #2c3e50;
+  color: var(--color-text);
   margin: 1em 0 0.5em;
 }
 
@@ -64,7 +87,7 @@ h1 {
 }
 
 h2, h3 {
-  color: #2c3e50;
+  color: var(--color-text);
 }
 
 h3 {
@@ -76,7 +99,7 @@ h3 {
 /* Navigation Bar                 */
 /* ============================= */
 nav {
-  background-color: #2c3e50;
+  background-color: var(--color-nav-bg);
   color: #fff;
   padding: 12px 0;
   border-radius: 5px;
@@ -107,7 +130,7 @@ nav ul li a {
 }
 
 nav ul li:hover {
-  color: #f39c12;
+  color: var(--color-accent);
   text-decoration: underline;
 }
 
@@ -115,7 +138,7 @@ nav ul li:hover {
 /* Header                        */
 /* ============================= */
 #top-header {
-  background-color: #1a1a1a;
+  background-color: var(--color-header-bg);
   color: #ffffff;
   display: flex;
   justify-content: space-between;
@@ -135,26 +158,26 @@ nav ul li:hover {
 }
 
 .siteName a:hover {
-  color: orange;
+  color: var(--color-accent);
 }
 
 #tools a {
   color: whitesmoke;
   font-size: 16px;
   text-decoration: none;
-  background-color: #333;
+  background-color: var(--color-tools-bg);
   padding: 8px 15px;
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 #tools a:hover {
-  background-color: #ff9900;
-  color: #1a1a1a;
+  background-color: var(--color-accent);
+  color: var(--color-header-bg);
 }
 
 #tools a:focus {
-  outline: 2px solid orange;
+  outline: 3px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -187,7 +210,7 @@ nav ul li:hover {
 }
 
 .car-promo h2 {
-  color: #f39c12;
+  color: var(--color-accent);
   margin-bottom: 10px;
 }
 
@@ -196,7 +219,7 @@ nav ul li:hover {
 }
 
 .car-promo button {
-  background-color: #3498db;
+  background-color: var(--color-primary);
   color: black;
   padding: 10px 20px;
   border: none;
@@ -206,7 +229,7 @@ nav ul li:hover {
 }
 
 .car-promo button:hover {
-  background-color: #2980b9;
+  background-color: var(--color-primary-hover);
 }
 
 /* ============================= */
@@ -232,7 +255,7 @@ nav ul li:hover {
 
 .upgrade-grid div {
   text-align: center;
-  background-color: #3498db;
+  background-color: var(--color-primary);
   padding: 10px;
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -262,7 +285,7 @@ nav ul li:hover {
 /* ============================= */
 button, .btn {
   display: inline-block;
-  background-color: #3498db;
+  background-color: var(--color-primary);
   color: #fff;
   padding: 10px 20px;
   margin: 10px 0;
@@ -273,8 +296,31 @@ button, .btn {
   transition: background-color 0.3s ease;
 }
 
-button:hover, .btn:hover {
-  background-color: #2980b9;
+button:hover:not(:disabled), .btn:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+button:disabled,
+button[disabled],
+.btn:disabled,
+.btn[disabled] {
+  background-color: #bbb;
+  cursor: not-allowed;
+  opacity: 0.6;
+  color: #666;
+  pointer-events: none;
+}
+
+/* ============================= */
+/* Focus Styles (Keyboard only)  */
+/* ============================= */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 /* ============================= */
@@ -284,7 +330,7 @@ footer {
   text-align: center;
   margin-top: 30px;
   padding: 10px;
-  background-color: #2c3e50;
+  background-color: var(--color-nav-bg);
   color: #fff;
   border-radius: 5px;
   opacity: 0.95;
@@ -292,14 +338,14 @@ footer {
 }
 
 footer a {
-  color: #f39c12;
+  color: var(--color-accent);
   text-decoration: none;
 }
 
 /* ============================= */
 /* Forms General Styling          */
 /* ============================= */
-.form-box, #registration-form, form#loginForm, form.inv-form {
+.form-box, #registration-form, #update-form, form#loginForm, form.inv-form {
   max-width: 420px;
   margin: 2rem auto;
   padding: 2rem 2.5rem;
@@ -312,12 +358,12 @@ footer a {
   gap: 1.4rem;
 }
 
-.form-box label, #registration-form label, form#loginForm label, form.inv-form label {
+.form-box label, #registration-form label, #update-form label, form#loginForm label, form.inv-form label {
   font-weight: 600;
   color: #34495e;
 }
 
-.form-box input, #registration-form input, form#loginForm input[type="email"], form#loginForm input[type="password"], form.inv-form input[type="text"], form.inv-form input[type="number"], form.inv-form textarea, form.inv-form select {
+.form-box input, #registration-form input, #update-form input, form#loginForm input[type="email"], form#loginForm input[type="password"], form.inv-form input[type="text"], form.inv-form input[type="number"], form.inv-form textarea, form.inv-form select {
   padding: 0.5rem 0.75rem;
   border: 1.8px solid #ccc;
   border-radius: 8px;
@@ -329,18 +375,18 @@ footer a {
   resize: vertical;
 }
 
-.form-box input:focus, #registration-form input:focus, form#loginForm input:focus, form.inv-form input:focus, form.inv-form textarea:focus, form.inv-form select:focus {
-  border-color: #3498db;
+.form-box input:focus, #registration-form input:focus, #update-form input:focus,form#loginForm input:focus, form.inv-form input:focus, form.inv-form textarea:focus, form.inv-form select:focus {
+  border-color: var(--color-primary);
   outline: none;
-  box-shadow: 0 0 8px #3498dbaa;
+  box-shadow: 0 0 8px var(--color-primary);
 }
 
 .form-box textarea, form.inv-form textarea {
   min-height: 100px;
 }
 
-.form-box button[type="submit"], #registration-form button[type="submit"], form#loginForm .submit-btn, form.inv-form button[type="submit"] {
-  background-color: #3498db;
+.form-box button[type="submit"], #registration-form button[type="submit"], #update-form button[type="submit"],form#loginForm .submit-btn, form.inv-form button[type="submit"] {
+  background-color: var(--color-primary);
   color: #fff;
   font-weight: 700;
   padding: 1rem 0;
@@ -353,9 +399,50 @@ footer a {
   align-self: flex-start;
 }
 
-.form-box button[type="submit"]:hover, #registration-form button[type="submit"]:hover, form#loginForm .submit-btn:hover, form.inv-form button[type="submit"]:hover {
-  background-color: #2980b9;
+.form-box button[type="submit"]:hover, #registration-form button[type="submit"]:hover,#update-form button[type="submit"]:hover, form#loginForm .submit-btn:hover, form.inv-form button[type="submit"]:hover {
+  background-color: var(--color-primary-hover);
 }
+
+/* ============================= */
+/* Notice and Error Messages      */
+/* ============================= */
+ul.notice, ul.errors {
+  max-width: 420px;
+  margin: 1rem auto 0 auto;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  list-style-type: none;
+  box-sizing: border-box;
+}
+
+ul.notice {
+  background-color: #d1e7dd; /* pale green */
+  border: 1.5px solid #badbcc;
+  color: #0f5132;
+}
+
+ul.errors {
+  background-color: #f8d7da; /* pale red */
+  border: 1.5px solid #f5c2c7;
+  color: #842029;
+}
+
+ul.notice li, ul.errors li {
+  margin-bottom: 0.5rem;
+}
+
+/* ============================= */
+/* Password Info Paragraph        */
+/* ============================= */
+form fieldset p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
 
 /* ============================= */
 /* Flash and Error Messages       */
@@ -372,14 +459,14 @@ footer a {
 
 .flash-message.notice {
   background-color: #cff4fc;
-  border-left-color: #0dcaf0;
+  border-left-color: var(--color-info);
   color: #055160;
-  border-left: 6px solid #0dcaf0;
+  border-left: 6px solid var(--color-info);
 }
 
 .flash-message.error {
   background-color: #f8d7da;
-  border-left: 6px solid #d9534f;
+  border-left: 6px solid var(--color-error);
   color: #842029;
 }
 
@@ -401,9 +488,9 @@ footer a {
 
 .error-messages {
   background-color: #ffebee;
-  color: #c62828;
+  color: var(--color-error);
   padding: 1rem;
-  border-left: 5px solid #c62828;
+  border-left: 5px solid var(--color-error);
   margin-bottom: 1rem;
   border-radius: 6px;
 }
@@ -430,7 +517,7 @@ footer a {
   text-align: center;
   font-size: 2.2rem;
   margin-bottom: 1.5rem;
-  color: #2c3e50;
+  color: var(--color-text);
   font-weight: 700;
 }
 
@@ -442,7 +529,7 @@ footer a {
 }
 
 #loginContainer p a {
-  color: #2980b9;
+  color: var(--color-primary);
   font-weight: 600;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -480,7 +567,7 @@ footer a {
 
 #loginForm input[type="email"]:focus,
 #loginForm input[type="password"]:focus {
-  border-color: #2980b9;
+  border-color: var(--color-primary);
   outline: none;
   box-shadow: 0 0 6px rgba(41, 128, 185, 0.35);
 }
@@ -491,25 +578,6 @@ footer a {
   margin-top: -0.8rem;
   margin-bottom: 0.5rem;
   display: block;
-}
-
-.submit-btn {
-  padding: 0.85rem 1rem;
-  background-color: #2980b9;
-  color: white;
-  font-weight: 700;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 0.5rem;
-}
-
-.submit-btn:hover,
-.submit-btn:focus {
-  background-color: #1c5980;
-  outline: none;
 }
 
 /* ============================= */
@@ -559,25 +627,25 @@ footer a {
 .namePrice h2 {
   font-size: 1.2rem;
   margin: 0.5rem 0;
-  color: #2c3e50;
+  color: var(--color-text);
 }
 
 .namePrice a {
   text-decoration: none;
-  color: #2c3e50;
+  color: var(--color-text);
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
 .namePrice a:hover {
-  color: #007BFF;
+  color: var(--color-primary);
 }
 
 .namePrice span {
   display: block;
   font-size: 1rem;
   font-weight: bold;
-  color: #28a745;
+  color: var(--color-success);
   margin-top: 0.5rem;
 }
 
@@ -647,7 +715,7 @@ footer a {
 }
 
 #inventoryDisplay thead {
-  background-color: #0074D9;
+  background-color: var(--color-primary);
   color: #fff;
 }
 
@@ -663,7 +731,7 @@ footer a {
 }
 
 #inventoryDisplay a {
-  color: #0074D9;
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
 }
@@ -685,7 +753,7 @@ select, #classificationList {
 }
 
 select:focus, #classificationList:focus {
-  border-color: #007BFF;
+  border-color: var(--color-primary);
   outline: none;
   box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
 }
@@ -725,7 +793,7 @@ select:focus, #classificationList:focus {
     padding: 1.5rem;
   }
 
-  .form-box button[type="submit"], #registration-form button[type="submit"], form#loginForm .submit-btn, form.inv-form button[type="submit"] {
+  .form-box button[type="submit"], #registration-form button[type="submit"],#update-form button[type="submit"], form#loginForm .submit-btn, form.inv-form button[type="submit"] {
     width: 100%;
     align-self: center;
   }

@@ -1,11 +1,11 @@
 <main class="form-view">
-  <h1><%= title %></h1>
+  <h1><%= typeof title !== 'undefined' ? title : '' %></h1>
 
-  <% if (message && message.length > 0) { %>
+  <% if (typeof message !== 'undefined' && message.length > 0) { %>
     <div class="flash-message"><%= message %></div>
   <% } %>
 
-  <% if (errors && errors.length > 0) { %>
+  <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
     <div class="error-messages">
       <ul>
         <% errors.forEach(error => { %>
@@ -22,7 +22,7 @@
       id="classification_name"
       name="classification_name"
       placeholder="e.g. SUV"
-      value="<%= classification_name || '' %>"
+      value="<%= typeof classification_name !== 'undefined' ? classification_name : '' %>"
       required
     />
     <small>No spaces or special characters allowed.</small>

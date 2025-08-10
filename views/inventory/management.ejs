@@ -1,8 +1,10 @@
 <main>
-  <h1><%= title %></h1>
+  <% if (typeof title !== 'undefined' && title) { %>
+    <h1><%= title %></h1>
+  <% } %>
 
   <!-- Flash message -->
-  <% if (message && message.length > 0) { %>
+  <% if (Array.isArray(message) && message.length > 0) { %>
     <div class="flash-message">
       <% message.forEach(msg => { %>
         <p><%= msg %></p>
@@ -21,7 +23,7 @@
   <p>Select a classification from the list to see the vehicles in that category.</p>
 
   <!-- Classification Dropdown -->
-  <%- classificationSelect %>
+  <%- typeof classificationSelect !== 'undefined' ? classificationSelect : '<p>No classifications available.</p>' %>
 
   <!-- Inventory Table -->
   <table id="inventoryDisplay"></table>

@@ -1,9 +1,11 @@
-<% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+<% if (Array.isArray(errors) && errors.length > 0) { %>
   <ul class="notice">
     <% errors.forEach(error => { %>
       <li><%= error.msg %></li>
     <% }) %>
   </ul>
+<% } else if (typeof message !== 'undefined' && message.length > 0) { %>
+  <p class="notice"><%= message %></p>
 <% } else { %>
   <p class="notice">Sorry, we appear to have lost that page.</p>
 <% } %>

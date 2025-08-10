@@ -1,0 +1,75 @@
+<h1><%= title %></h1>
+
+<% if (message && message.length > 0) { %>
+<ul class="notice">
+	<% message.forEach(msg => { %>
+	<li><%= msg %></li>
+	<% }); %>
+</ul>
+<% } %> <% if (errors && errors.length > 0) { %>
+<ul class="errors">
+	<% errors.forEach(err => { %>
+	<li><%= err.msg %></li>
+	<% }); %>
+</ul>
+<% } %>
+
+<!-- Account Update Form -->
+<form id="update-form" action="/account/update/<%= clientId %>" method="POST" novalidate>
+
+	<fieldset>
+		<legend>Account Update</legend>
+
+		<input type="hidden" name="account_id" value="<%= clientId %>" />
+
+		<label for="account_firstname">First Name:</label>
+		<input
+			type="text"
+			id="account_firstname"
+			name="account_firstname"
+			required
+			value="<%= account_firstname || '' %>" />
+
+		<label for="account_lastname">Last Name:</label>
+		<input
+			type="text"
+			id="account_lastname"
+			name="account_lastname"
+			required
+			value="<%= account_lastname || '' %>" />
+
+		<label for="account_email">Email:</label>
+		<input
+			type="email"
+			id="account_email"
+			name="account_email"
+			required
+			value="<%= account_email || '' %>" />
+
+		<button type="submit">Update Account</button>
+	</fieldset>
+</form>
+
+<!-- Password Change Form -->
+<form id="update-form" action="/account/password" method="POST" novalidate>
+	<fieldset>
+		<legend>Change Password</legend>
+
+		<input type="hidden" name="account_id" value="<%= clientId %>" />
+
+		<label for="account_password">New Password:</label>
+		<input
+			type="password"
+			id="account_password"
+			name="account_password"
+			minlength="12"
+			placeholder="Enter new password to change it"
+			autocomplete="new-password" />
+		<p>
+			Password must be at least 12 characters and include uppercase, lowercase,
+			number, and symbol.
+		</p>
+
+		<button type="submit">Change Password</button>
+	</fieldset>
+</form>

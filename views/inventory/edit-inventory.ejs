@@ -1,8 +1,10 @@
 <main>
-  <h1><%= title %></h1>
+  <% if (typeof title !== 'undefined' && title) { %>
+    <h1><%= title %></h1>
+  <% } %>
 
-  <!-- Flash message -->
-  <% if (errors && errors.length > 0) { %>
+  <!-- Flash Errors -->
+  <% if (Array.isArray(errors) && errors.length > 0) { %>
     <ul class="notice">
       <% errors.forEach(error => { %>
         <li><%= error.msg %></li>
@@ -10,7 +12,8 @@
     </ul>
   <% } %>
 
-  <% if (message && message.length > 0) { %>
+  <!-- Flash Messages -->
+  <% if (Array.isArray(message) && message.length > 0) { %>
     <div class="flash-message">
       <% message.forEach(msg => { %>
         <p><%= msg %></p>
@@ -21,7 +24,7 @@
   <form action="/inv/update" method="post" class="inv-form">
     <!-- Classification Dropdown -->
     <label for="classification_id">Classification</label>
-    <%- classificationSelect %> <!-- unescaped output -->
+    <%- typeof classificationSelect !== 'undefined' ? classificationSelect : '' %>
 
     <!-- Make -->
     <label for="inv_make">Make</label>
@@ -30,7 +33,7 @@
       id="inv_make"
       name="inv_make"
       required
-      value="<%= vehicle?.inv_make || '' %>"
+      value="<%= vehicle && vehicle.inv_make ? vehicle.inv_make : '' %>"
     />
 
     <!-- Model -->
@@ -40,12 +43,12 @@
       id="inv_model"
       name="inv_model"
       required
-      value="<%= vehicle?.inv_model || '' %>"
+      value="<%= vehicle && vehicle.inv_model ? vehicle.inv_model : '' %>"
     />
 
     <!-- Description -->
     <label for="inv_description">Description</label>
-    <textarea id="inv_description" name="inv_description" required><%= vehicle?.inv_description || '' %></textarea>
+    <textarea id="inv_description" name="inv_description" required><%= vehicle && vehicle.inv_description ? vehicle.inv_description : '' %></textarea>
 
     <!-- Image -->
     <label for="inv_image">Image Path</label>
@@ -54,7 +57,7 @@
       id="inv_image"
       name="inv_image"
       required
-      value="<%= vehicle?.inv_image || '/images/vehicles/no-image.png' %>"
+      value="<%= vehicle && vehicle.inv_image ? vehicle.inv_image : '/images/vehicles/no-image.png' %>"
     />
 
     <!-- Thumbnail -->
@@ -64,7 +67,7 @@
       id="inv_thumbnail"
       name="inv_thumbnail"
       required
-      value="<%= vehicle?.inv_thumbnail || '/images/vehicles/no-image-tn.png' %>"
+      value="<%= vehicle && vehicle.inv_thumbnail ? vehicle.inv_thumbnail : '/images/vehicles/no-image-tn.png' %>"
     />
 
     <!-- Price -->
@@ -75,7 +78,7 @@
       id="inv_price"
       name="inv_price"
       required
-      value="<%= vehicle?.inv_price || '' %>"
+      value="<%= vehicle && vehicle.inv_price ? vehicle.inv_price : '' %>"
     />
 
     <!-- Year -->
@@ -85,7 +88,7 @@
       id="inv_year"
       name="inv_year"
       required
-      value="<%= vehicle?.inv_year || '' %>"
+      value="<%= vehicle && vehicle.inv_year ? vehicle.inv_year : '' %>"
     />
 
     <!-- Miles -->
@@ -95,7 +98,7 @@
       id="inv_miles"
       name="inv_miles"
       required
-      value="<%= vehicle?.inv_miles || '' %>"
+      value="<%= vehicle && vehicle.inv_miles ? vehicle.inv_miles : '' %>"
     />
 
     <!-- Color -->
@@ -105,11 +108,11 @@
       id="inv_color"
       name="inv_color"
       required
-      value="<%= vehicle?.inv_color || '' %>"
+      value="<%= vehicle && vehicle.inv_color ? vehicle.inv_color : '' %>"
     />
 
     <!-- Hidden inventory ID -->
-    <input type="hidden" name="inv_id" value="<%= vehicle?.inv_id || '' %>">
+    <input type="hidden" name="inv_id" value="<%= vehicle && vehicle.inv_id ? vehicle.inv_id : '' %>">
 
     <button type="submit">Update Vehicle</button>
   </form>

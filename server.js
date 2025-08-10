@@ -54,16 +54,19 @@ app.use((req, res, next) => {
   const token = req.cookies.jwt;
 
   res.locals.loggedin = false;
-  res.locals.clientFirstname = null; // ✅ Always define
+  res.locals.clientFirstname = null;
+  res.locals.account_type = null;
+  res.locals.clientId = null;
 
   if (!token) {
     return next();
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     res.locals.loggedin = true;
-    res.locals.clientFirstname = decoded.client_firstname; // ✅ Now it's always defined
+    res.locals.clientFirstname = decoded.client_firstname;
+    res.locals.account_type = decoded.account_type;  
     res.locals.clientId = decoded.client_id;
   } catch (error) {
     res.locals.loggedin = false;
@@ -71,6 +74,7 @@ app.use((req, res, next) => {
 
   next();
 });
+
 
 
 
@@ -86,7 +90,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(static)
 
-//app.use(express.static(path.join(__dirname, "public")));
+
 
 app.use(utilities.checkJWTToken)
 
@@ -111,6 +115,7 @@ app.use(async (err, req, res, next) => {
     title: err.status || "Server Error",
     message,
     nav,
+    errors: []
   })
 })
 

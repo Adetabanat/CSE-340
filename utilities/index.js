@@ -1,6 +1,6 @@
 const invModel = require("../models/inventory-model");
-const jwt = require("jsonwebtoken")
-require("dotenv").config()
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const Util = {};
 
@@ -9,7 +9,7 @@ const Util = {};
  ************************** */
 Util.getNav = async function () {
   try {
-    const data = await invModel.getClassifications(); // Already returns rows
+    const data = await invModel.getClassifications(); // returns array
     let list = "<ul>";
     list += '<li><a href="/" title="Home page">Home</a></li>';
     data.forEach((row) => {
@@ -27,22 +27,99 @@ Util.getNav = async function () {
   }
 };
 
+Util.buildClassificationList = async function (selectedClassificationId = null) {
+  const data = await invModel.getClassifications();
+  let classificationList = '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
+
+  data.forEach((row) => {
+    classificationList += `<option value="${row.classification_id}"`;
+    if (selectedClassificationId == row.classification_id) {
+      classificationList += " selected";
+    }
+    classificationList += `>${row.classification_name}</option>`;
+  });
+
+  classificationList += "</select>";
+  return classificationList;
+};
+
 /* **************************************
- * Build the detail view HTML 
+ * Middleware to check token validity
  ************************************** */
-Util.buildDetailView = function (data) {
-  return `
-    <div class="vehicle-detail">
-      <img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model}">
-      <div class="vehicle-info">
-        <h2>${data.inv_make} ${data.inv_model} (${data.inv_year})</h2>
-        <h3>$${Number(data.inv_price).toLocaleString()}</h3>
-        <p><strong>Mileage:</strong> ${Number(data.inv_miles).toLocaleString()} miles</p>
-        <p><strong>Color:</strong> ${data.inv_color}</p>
-        <p>${data.inv_description}</p>
-      </div>
-    </div>
-  `;
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("notice", "Please log in");
+          res.clearCookie("jwt");
+          return res.redirect("/account/login");
+        }
+        res.locals.accountData = accountData;
+        res.locals.loggedin = true;
+        // Ensure these keys match your token payload exactly
+        res.locals.clientFirstname = accountData.account_firstname; 
+        res.locals.account_type = accountData.account_type;
+        res.locals.clientId = accountData.account_id;
+        next();
+      }
+    );
+  } else {
+    next();
+  }
+};
+
+/* ****************************************
+ * Middleware For Handling Errors
+ **************************************** */
+Util.handleErrors = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
+
+/* ****************************************
+ * Middleware to check if logged in
+ **************************************** */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    return next();
+  }
+  req.flash("notice", "Please log in to access this page.");
+
+  Util.getNav()
+    .then((nav) => {
+      res.status(403).render("account/login", {
+        title: "Login",
+        nav,
+        message: req.flash("notice"),
+        errors: null,
+      });
+    })
+    .catch((err) => next(err));
+};
+
+/* ****************************************
+ * Middleware to check if user is Employee or Admin
+ **************************************** */
+Util.checkEmployeeOrAdmin = async (req, res, next) => {
+  if (
+    res.locals.loggedin &&
+    (res.locals.account_type === "Employee" || res.locals.account_type === "Admin")
+  ) {
+    return next();
+  }
+
+  req.flash("notice", "You must be logged in as an employee or admin to access that page.");
+
+  const nav = await Util.getNav();
+
+  return res.status(403).render("account/login", {
+    title: "Login",
+    nav,
+    message: req.flash("notice"),
+    errors: null,
+  });
 };
 
 /* **************************************
@@ -76,78 +153,5 @@ Util.buildClassificationGrid = function (data) {
 
   return grid;
 };
-
-/**
- * Builds a dropdown list of vehicle classifications for forms
- */
-Util.buildClassificationList = async function (classification_id = null) {
-  let data = await invModel.getClassifications(); // data is an array
-  let classificationList =
-    '<select name="classification_id" id="classificationList" required>';
-  classificationList += "<option value=''>Choose a Classification</option>";
-  
-  data.forEach((row) => {
-    classificationList += `<option value="${row.classification_id}"`;
-    if (
-      classification_id != null &&
-      row.classification_id == classification_id
-    ) {
-      classificationList += " selected";
-    }
-    classificationList += `>${row.classification_name}</option>`;
-  });
-
-  classificationList += "</select>";
-  return classificationList;
-}
-
-
-
-Util.checkLogin = (req, res, next) => {
-  if (res.locals.loggedin) {
-    next();
-  } else {
-    req.flash("message", "Please log in.");
-    res.redirect("/account/login");
-  }
-};
-
-
-
-/* ****************************************
- * Middleware For Handling Errors
- * Wrap other functions in this for 
- * General Error Handling
- **************************************** */
-/* ****************************************
- * Middleware For Handling Errors
- * Wrap other function in this for 
- * General Error Handling
- **************************************** */
-Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
-
-/* ****************************************
-* Middleware to check token validity
-**************************************** */
-Util.checkJWTToken = (req, res, next) => {
- if (req.cookies.jwt) {
-  jwt.verify(
-   req.cookies.jwt,
-   process.env.ACCESS_TOKEN_SECRET,
-   function (err, accountData) {
-    if (err) {
-     req.flash("Please log in")
-     res.clearCookie("jwt")
-     return res.redirect("/account/login")
-    }
-    res.locals.accountData = accountData
-    res.locals.loggedin = 1
-    next()
-   })
- } else {
-  next()
- }
-}
-
 
 module.exports = Util;
