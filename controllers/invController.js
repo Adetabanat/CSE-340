@@ -1,6 +1,7 @@
 const invModel = require("../models/inventory-model.js");
 const utilities = require("../utilities/");
 const { validationResult } = require("express-validator");
+const reviewModel = require("../models/review-model");
 
 const invCont = {};
 
@@ -105,7 +106,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
       return res.redirect("/inv");
     }
 
-    const item = await invModel.getInventoryById(inv_id);
+    const item = await invModel.getVehicleById(inv_id);  // <-- changed here
     if (!item) {
       req.flash("message", "Vehicle not found.");
       return res.redirect("/inv");
@@ -118,6 +119,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
       title: `${item.inv_make} ${item.inv_model}`,
       nav,
       detailHTML,
+      vehicle: item,
       message: req.flash("message") || [],
       errors: [],
     });
@@ -229,7 +231,7 @@ invCont.buildDeleteConfirmation = async function (req, res, next) {
     }
 
     const nav = await utilities.getNav();
-    const item = await invModel.getInventoryById(inv_id);
+    const item = await invModel.getVehicleById(inv_id);  // <-- changed here
 
     if (!item) {
       req.flash("message", "Vehicle not found.");
@@ -310,7 +312,7 @@ invCont.editInventoryView = async function (req, res, next) {
     }
 
     const nav = await utilities.getNav();
-    const itemData = await invModel.getInventoryById(inv_id);
+    const itemData = await invModel.getVehicleById(inv_id);  // <-- changed here
 
     if (!itemData) {
       req.flash("message", "Vehicle not found.");
@@ -343,5 +345,112 @@ invCont.editInventoryView = async function (req, res, next) {
     next(error);
   }
 };
+
+invCont.updateInventory = async function (req, res, next) {
+  const {
+    inv_id,
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+  } = req.body;
+
+  const errors = validationResult(req);
+  const nav = await utilities.getNav();
+  const classifications = (await invModel.getClassifications()) || [];
+
+  const vehicle = {
+    inv_id,
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+  };
+
+  if (!errors.isEmpty()) {
+    return res.render("./inventory/edit-inventory", {
+      title: "Edit Vehicle",
+      nav,
+      classifications,
+      vehicle,
+      errors: errors.array(),
+      message: req.flash("message") || [],
+    });
+  }
+
+  try {
+    const updatedVehicle = await invModel.updateInventory(
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id
+    );
+
+    if (updatedVehicle) {
+      req.flash("message", "Vehicle updated successfully.");
+      res.redirect(`/inv/detail/${inv_id}`);
+    } else {
+      req.flash("message", "Failed to update vehicle.");
+      res.redirect(`/inv/edit/${inv_id}`);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+invCont.buildByInventoryId = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.inv_id);
+    if (isNaN(inv_id)) {
+      req.flash("message", "Invalid vehicle ID.");
+      return res.redirect("/inv");
+    }
+
+    const item = await invModel.getVehicleById(inv_id);
+    if (!item) {
+      req.flash("message", "Vehicle not found.");
+      return res.redirect("/inv");
+    }
+
+    // Fetch reviews for this vehicle
+    const reviews = await reviewModel.getReviewsByInventory(inv_id);
+
+    const nav = await utilities.getNav();
+    const detailHTML = utilities.buildDetailView(item);
+
+    res.render("./inventory/detail", {
+      title: `${item.inv_make} ${item.inv_model}`,
+      nav,
+      detailHTML,
+      vehicle: item,   // pass vehicle data
+      reviews,         // pass reviews array
+      message: req.flash("message") || [],
+      errors: [],
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
 
 module.exports = invCont;

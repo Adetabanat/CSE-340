@@ -1,8 +1,31 @@
 <main id="vehicle-detail-view">
-  <% if (typeof title !== 'undefined' && title) { %>
-    <h1><%= title %></h1>
-  <% } %>
-  <div class="vehicle-container">
-    <%- typeof detailHTML !== 'undefined' ? detailHTML : '' %>
-  </div>
+	<% if (typeof title !== 'undefined' && title) { %>
+	<h1><%= title %></h1>
+	<% } %>
+	<div class="vehicle-container">
+		<%- typeof detailHTML !== 'undefined' ? detailHTML : '' %>
+	</div>
+
+	<h2>Reviews</h2>
+
+	<% if (reviews && reviews.length > 0) { %>
+	<ul>
+		<% reviews.forEach(review => { %>
+		<li>
+			<strong
+				><%= review.account_firstname %> <%= review.account_lastname %></strong
+			>: <%= review.rating %> / 5
+			<br />
+			<%= review.comment %>
+			<br />
+			<small><%= new Date(review.created_at).toLocaleDateString() %></small>
+		</li>
+		<% }) %>
+	</ul>
+	<% } else { %>
+	<p>
+		No reviews yet. Be the first to
+		<a href="/reviews/add/<%= vehicle.inv_id %>">write one!</a>
+	</p>
+	<% } %>
 </main>

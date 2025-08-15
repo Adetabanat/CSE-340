@@ -1,0 +1,39 @@
+
+
+<h1>Add Review</h1>
+
+<% if (message.length > 0) { %>
+  <div class="notice">
+    <% message.forEach(msg => { %>
+      <p><%= msg %></p>
+    <% }) %>
+  </div>
+<% } %>
+
+<% if (errors.length > 0) { %>
+  <div class="errors">
+    <ul>
+      <% errors.forEach(error => { %>
+        <li><%= error %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+
+<form action="/reviews/add" method="POST" novalidate>
+  <input type="hidden" name="inv_id" value="<%= inv_id %>" />
+
+  <label for="rating">Rating:</label>
+  <select id="rating" name="rating" required>
+    <option value="">Choose a rating</option>
+    <% for(let i=1; i<=5; i++) { %>
+      <option value="<%= i %>" <%= rating == i ? "selected" : "" %>><%= i %></option>
+    <% } %>
+  </select>
+
+  <label for="comment">Comment:</label>
+  <textarea id="comment" name="comment" required maxlength="500"><%= comment || "" %></textarea>
+
+  <button type="submit">Submit Review</button>
+</form>
+

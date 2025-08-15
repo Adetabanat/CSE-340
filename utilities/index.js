@@ -154,4 +154,27 @@ Util.buildClassificationGrid = function (data) {
   return grid;
 };
 
+/* **************************************
+ * Build the detailed vehicle view HTML
+ ************************************** */
+Util.buildDetailView = function (item) {
+  if (!item) return '<p class="notice">Vehicle details not available.</p>';
+
+  return `
+    <div class="vehicle-detail">
+      <h2>${item.inv_make} ${item.inv_model}</h2>
+      <img src="${item.inv_image}" alt="Image of ${item.inv_make} ${item.inv_model}" />
+      <p>${item.inv_description}</p>
+      <ul>
+        <li><strong>Year:</strong> ${item.inv_year}</li>
+        <li><strong>Price:</strong> $${new Intl.NumberFormat('en-US').format(item.inv_price)}</li>
+        <li><strong>Miles:</strong> ${new Intl.NumberFormat('en-US').format(item.inv_miles)}</li>
+        <li><strong>Color:</strong> ${item.inv_color}</li>
+        <li><strong>Classification:</strong> ${item.classification_name}</li>
+      </ul>
+    </div>
+  `;
+};
+
+
 module.exports = Util;

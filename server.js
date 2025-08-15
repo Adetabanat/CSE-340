@@ -4,6 +4,7 @@ const env = require("dotenv").config()
 const baseController = require("./controllers/baseController")
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
+const reviewRoute = require("./routes/reviewRoute");
 const accountRoute = require("./routes/accountRoute")
 const utilities = require("./utilities")
 const session = require("express-session")
@@ -100,6 +101,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory Routes
 app.use("/inv", inventoryRoute)
 app.use("/account", accountRoute)
+app.use("/reviews", reviewRoute);
 
 // 404 Handler
 app.use(async (req, res, next) => {
