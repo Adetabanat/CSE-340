@@ -276,3 +276,5 @@ CREATE TABLE reviews (
   comment TEXT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
