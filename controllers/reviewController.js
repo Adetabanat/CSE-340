@@ -9,7 +9,10 @@ async function buildReviewForm(req, res) {
     title: "Add Review",
     nav,
     inv_id,
-    message: req.flash("notice") || [],
+     rating: "",   // ✅ ensure it's always defined
+    comment: "",
+    message: req.flash("notice") || [], rating: "",   // ✅ ensure it's always defined
+    comment: "",
     errors: [],
   });
 }
